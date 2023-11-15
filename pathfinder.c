@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "main.h"
 
 /**
  * pathFinder - iterates through directories to find the path
@@ -6,7 +6,7 @@
  * Return: full path of command
  */
 
-char pathFinder(char *cmd)
+char *pathFinder(char *cmd)
 {
 	char *pathMain, *pathCp, *pathTok, *cmdPath;
 	int pathLen;
