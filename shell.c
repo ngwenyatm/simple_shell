@@ -64,6 +64,8 @@ int main(int ac, char **args, char **env)
 			command[inputLen - 1] = '\0';
 		}
 
+		builtIn(args, envp);
+
 		cmdPath = pathFinder(command);
 
 		if (cmdPath != NULL)
