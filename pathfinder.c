@@ -23,14 +23,14 @@ char pathFinder(char *cmd)
 
 			while (pathTok != NULL)
 			{
-				pathLen = strlen(cmd) + strlen(pathTok);
+				pathLen = strLen(cmd) + strLen(pathTok);
 				cmdPath = malloc(pathLen + 2);
 
 				if (cmdPath != NULL)
 				{
 					_strcpy(cmdPath, pathTok);
-					_strcat(cmdPath, "/");
-					_strcat(cmdPath, cmd);
+					strCat(cmdPath, "/");
+					strCat(cmdPath, cmd);
 
 					if (stat(cmdPath, &buff) == 0)
 					{
