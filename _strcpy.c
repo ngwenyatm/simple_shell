@@ -11,23 +11,22 @@
 
 char *_strcpy(char *newstr, const char *strPrime)
 {
-        int i = 0;
+	int i = 0;
 
-        if (newstr == NULL)
-        {
-                return (NULL);
-        }
+	if (newstr == NULL)
+	{
+		return (NULL);
+	}
 
-        char *ptr = newstr;
+	char *ptr = newstr;
 
-        for (i = 0; i < strlen(strPrime); i++)
-        {
-                if (strPrime[i] != '\0')
-                {
-                        newstr[i] = strPrime[i];
-                }
-        }
-
-        newstr[i] = '\0';
-        return (ptr);
+	for (i = 0; i < strlen(strPrime); i++)
+	{
+		if (strPrime[i] != '\0')
+		{
+			newstr[i] = strPrime[i];
+		}
+	}
+	newstr[i] = '\0';
+	return (ptr);
 }
