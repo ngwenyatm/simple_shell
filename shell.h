@@ -1,6 +1,6 @@
+#ifndef SHELL_H
+#define SHELL_H
 #include <stddef.h>
-#ifndef MAIN_H
-#define MAIN_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,5 +13,5 @@ size_t strLen(char *str);
 char *pathFinder(char *cmd);
 char *_strcpy(char *newstr, const char *strPrime);
 void strCat(char str1[], char str2[]);
-
+int builtIn(char **args, char **env);
 #endif

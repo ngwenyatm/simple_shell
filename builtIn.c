@@ -8,18 +8,18 @@
 */
 int builtIn(char **args, char **envp)
 {
-	if (args[0] == "env")
+	if (strcmp(args[0],"env"))
 	{
 		int i = 0;
 
 		for (i = 0 ; envp[i] != NULL; i++)
 		{
-			write(STDOUT_FILENO, (const void *)envp[i], _strlen(envp[i]));
+			write(STDOUT_FILENO, (const void *)envp[i], strLen(envp[i]));
 			write(STDOUT_FILENO, "\n", 1);
 		}
 		return (1);
 	}
-	else if (args[0] == "exit")
+	else if (strcmp(args[0],"exit"))
 	{
 		exit(0);
 		return (1);
