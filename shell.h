@@ -13,5 +13,4 @@ size_t strLen(char *str);
 char *pathFinder(char *cmd);
 char *_strcpy(char *newstr, const char *strPrime);
 void strCat(char str1[], char str2[]);
-int builtIn(char **args, char **env);
 #endif
