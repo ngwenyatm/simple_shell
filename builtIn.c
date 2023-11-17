@@ -14,7 +14,7 @@ int builtIn(char **args, char **envp)
 
 		for (i = 0 ; envp[i] != NULL; i++)
 		{
-			write(STDOUT_FILENO, (const void *)envp[i], _strlen(envp[i]));
+			write(STDOUT_FILENO, (const void *)envp[i], strLen(envp[i]));
 			write(STDOUT_FILENO, "\n", 1);
 		}
 		return (1);

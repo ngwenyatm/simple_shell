@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * pathFinder - iterates through directories to find the path
