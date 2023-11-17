@@ -1,4 +1,4 @@
-#include  "main.h"
+#include  "shell.h"
 
 /**
  * main - Entry point.
@@ -12,7 +12,7 @@ int main(int ac, char **args, char **env)
 	char *command = NULL, *cp_Ptr = NULL;
 	char *cmdPath;
 	size_t commandLen = 0;
-	size_t charRead;
+	ssize_t charRead;
 	int tokCount = 0;
 	char *tok;
 	int inputLen;
@@ -25,7 +25,7 @@ int main(int ac, char **args, char **env)
 		write(STDOUT_FILENO, "$ ", 2);
 		fflush(stdout);
 
-		charRead = getline(&command, &commandLen, stdin);
+		charRead = getLine(&command, &commandLen, STDIN_FILENO);
 		if (charRead == -1)
 		{
 			break;
@@ -64,7 +64,7 @@ int main(int ac, char **args, char **env)
 			command[inputLen - 1] = '\0';
 		}
 
-		builtIn(args, envp);
+		builtIn(args, env);
 
 		cmdPath = pathFinder(command);
 
