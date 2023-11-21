@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "shell.h"
 
 /**
  * _strcpy - copies a string
@@ -9,24 +7,14 @@
  * Return: pointer to new copy string
  */
 
-char *_strcpy(char *newstr, const char *strPrime)
+char *_strcpy(char *newStr, const char *strPrime)
 {
 	int i = 0;
-
-	if (newstr == NULL)
-	{
-		return (NULL);
-	}
-
-	char *ptr = newstr;
-
-	for (i = 0; i < strlen(strPrime); i++)
-	{
-		if (strPrime[i] != '\0')
-		{
-			newstr[i] = strPrime[i];
-		}
-	}
-	newstr[i] = '\0';
-	return (ptr);
+while (strPrime[i] != '\0')
+  {
+	  newStr[i] = strPrime[i];
+	  i++;
+  }
+  newStr = '\0';
+  return newStr;
 }

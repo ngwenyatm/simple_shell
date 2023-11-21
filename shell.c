@@ -5,72 +5,61 @@
  * @ac: argument count
  * @args: Argument vector
  * @env: environment variable
- * Return: integer
+ * Return: 0
  */
+
 int main(int ac, char **args, char **env)
 {
-	char *command = NULL, *cp_Ptr = NULL;
+	char *command = NULL;
 	char *cmdPath;
-	size_t commandLen = 0;
-	ssize_t charRead;
+	size_t commandLen = 1;
+	int charRead;
 	int tokCount = 0;
 	char *tok;
 	int inputLen;
 	int status;
-	int i;
 	pid_t pid;
 
+	(void)ac;
+	(void)env;
 	while (1)
 	{
-		write(STDOUT_FILENO, "$ ", 2);
+		write(1, "$ ", 2);
 		fflush(stdout);
 
 		charRead = getLine(&command, &commandLen, STDIN_FILENO);
-		if (charRead == -1)
+
+		if(charRead == -1)
 		{
+			perror("Failed to read input");
 			break;
 		}
+
 		inputLen = strLen(command);
-		cp_Ptr = malloc(sizeof(char) * charRead);
-		if (cp_Ptr == NULL)
-		{
-			perror("failed allocate memory");
-			break;
-		}
 
-		_strcpy(cp_Ptr, command);
-
-		tok = strtok(command, " ");
-		while (tok != NULL)
-		{
-			tokCount++;
-			tok = strtok(NULL, " ");
-		}
-		tokCount++;
-		args = malloc(sizeof(char *) * tokCount);
-		tok = strtok(cp_Ptr, " ");
-
-		for (i = 0; tok != NULL; i++)
-		{
-			args[i] = malloc(sizeof(char) * strLen(tok));
-
-			_strcpy(args[i], tok);
-			tok = strtok(NULL, " ");
-		}
-		args[i] = NULL;
-
-		if (inputLen > 0 && command[inputLen - 1] == '\n')
+		if(inputLen > 0 && command[inputLen - 1] == '\n')
 		{
 			command[inputLen - 1] = '\0';
 		}
 
-		builtIn(args, env);
+		args = malloc(sizeof(char *) * (tokCount + 2));
+
+		tok = strtok(command, " ");
+		while (tok != NULL)
+		{
+			args[tokCount] = malloc(sizeof(char) * (strlen(tok) + 1));
+			_strcpy(args[tokCount],tok);
+			tokCount++;
+			tok = strtok(NULL, " ");
+		}
+		args[tokCount] = NULL;
 
 		cmdPath = pathFinder(command);
 
 		if (cmdPath != NULL)
 		{
 			args[0] = cmdPath;
+			
 			pid = fork();
 			if (pid == -1)
 			{
@@ -89,21 +78,18 @@ int main(int ac, char **args, char **env)
 			{
 				wait(&status);
 			}
+
 			free(cmdPath);
 		}
 		else
 		{
-			write(STDOUT_FILENO, "No command\n", 11);
+			write(1, "No command\n", 11);
 		}
+
+		free(args);
 	}
 
-
-	for (int i = 0; i < tokCount; i++)
-	{
-		free(args[i]);
-	}
-	free(args);
-	free(cp_Ptr);
 	free(command);
+	
 	return (0);
 }

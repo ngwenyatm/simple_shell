@@ -57,4 +57,6 @@ char *pathFinder(char *cmd)
 	{
 		return (cmd);
 	}
+
+	return (0);
 }

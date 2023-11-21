@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stddef.h>
 #include <sys/stat.h>
 size_t strLen(char *str);
 char *pathFinder(char *cmd);
@@ -15,5 +16,4 @@ void strCat(char str1[], char str2[]);
 int builtIn(char **args, char **env);
 void *_realloc(void *ptr, size_t newSize);
 ssize_t getLine(char **line, size_t *lineSize, int fd);
-
 #endif
